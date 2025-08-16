@@ -1,6 +1,8 @@
 import { PDFInfo, ProcessingOptions, ValidationResult } from '../types';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.PROD 
+  ? 'https://your-api-server.herokuapp.com' // 本番用APIサーバーURL
+  : '/api';
 
 export class APIError extends Error {
   constructor(message: string, public status?: number, public type?: string) {

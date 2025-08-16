@@ -18,6 +18,12 @@ PDFから任意のページを抽出・分割・削除するシンプルなウ�
 - Node.js 18以上
 - npm または yarn
 
+### オンラインデモ
+
+**フロントエンドのみ**: https://your-username.github.io/pdf-page-cutter/
+
+※PDF処理機能を使用するにはローカル環境でのセットアップが必要です
+
 ### インストール
 
 1. リポジトリをクローンまたはダウンロード
@@ -219,6 +225,24 @@ npm start
 - Vitest (テスト)
 - TypeScript
 - ESLint
+
+## デプロイメント
+
+### GitHub Pagesへの自動デプロイ
+
+1. GitHubリポジトリを作成
+2. コードをプッシュ
+3. Settings > Pages で "GitHub Actions" を選択
+4. 自動的にデプロイされます
+
+詳細は[DEPLOYMENT.md](DEPLOYMENT.md)をご覧ください。
+
+### フル機能のデプロイ
+
+PDF処理機能を含むフル機能を使用するには：
+1. APIサーバーを別途デプロイ（Heroku, Railway等）
+2. フロントエンドの設定を更新
+3. 両方をデプロイ
 
 ## ライセンス
 
