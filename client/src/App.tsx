@@ -89,31 +89,47 @@ function App() {
 
     setIsProcessing(true);
     try {
-      const blob = await api.processPDF(file, {
+      const result = await api.processPDF(file, {
         pageSpec,
         mode,
         engine: 'auto'
       });
 
       const baseFilename = file.name.replace(/\.pdf$/i, '');
-      let filename;
       
-      switch (mode) {
-        case 'extract':
-          filename = `${baseFilename}_extracted.pdf`;
-          break;
-        case 'split':
-          filename = validationResult.count === 1 
-            ? `${baseFilename}_page.pdf`
-            : `${baseFilename}_split.zip`;
-          break;
-        case 'delete':
-          filename = `${baseFilename}_deleted.pdf`;
-          break;
+      if ('files' in result) {
+        // Multiple files - download each separately
+        const filesWithNames = result.files.map((blob, index) => ({
+          blob,
+          filename: `${baseFilename}_page_${index + 1}.pdf`
+        }));
+        
+        for (let i = 0; i < filesWithNames.length; i++) {
+          const { blob, filename } = filesWithNames[i];
+          downloadBlob(blob, filename);
+          if (i < filesWithNames.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        }
+        success(`${filesWithNames.length}個のファイルをダウンロードしました`);
+      } else {
+        // Single file
+        let filename;
+        switch (mode) {
+          case 'extract':
+            filename = `${baseFilename}_extracted.pdf`;
+            break;
+          case 'split':
+            filename = `${baseFilename}_page.pdf`;
+            break;
+          case 'delete':
+            filename = `${baseFilename}_deleted.pdf`;
+            break;
+        }
+        
+        downloadBlob(result as Blob, filename);
+        success(`${getModeLabel(mode)}が完了しました`);
       }
-
-      downloadBlob(blob, filename);
-      success(`${getModeLabel(mode)}が完了しました`);
     } catch (err) {
       if (err instanceof APIError) {
         if (err.type === 'password_required') {

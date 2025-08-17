@@ -2,18 +2,23 @@
   "name": "pdf-page-cutter",
   "version": "1.0.0",
   "description": "PDF page extraction and splitting tool",
-  "main": "server/index.js",
+  "main": "api/upload.js",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
     "build": "cd client && npm run build",
     "test": "cd server && npm test",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "vercel-build": "cd client && npm install && npm run build"
   },
   "keywords": ["pdf", "page", "extraction", "splitting", "tool"],
   "author": "Your Name",
   "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
