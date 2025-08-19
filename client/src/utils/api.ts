@@ -143,7 +143,7 @@ export const downloadBlob = (blob: Blob, filename: string) => {
 };
 
 // Create ZIP file from multiple blobs (client-side)
-export const createZipFromBlobs = async (files: { blob: Blob, filename: string }[], zipFilename: string) => {
+export const createZipFromBlobs = async (files: { blob: Blob, filename: string }[]) => {
   // Simple ZIP creation - in a real app, you might want to use a library like JSZip
   // For now, we'll just download files individually
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

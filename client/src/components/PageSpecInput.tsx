@@ -30,7 +30,7 @@ export const PageSpecInput: React.FC<PageSpecInputProps> = ({
   isValidating
 }) => {
   const [showHelp, setShowHelp] = useState(false);
-  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
+  const [validationResult] = useState<ValidationResult | null>(null);
 
   const handlePresetClick = useCallback((preset: string) => {
     onPageSpecChange(preset);

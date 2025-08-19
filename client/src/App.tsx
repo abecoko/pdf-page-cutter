@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { UploadArea } from './components/UploadArea';
 import { PageSpecInput } from './components/PageSpecInput';
 import { ModeSelector } from './components/ModeSelector';
@@ -19,7 +19,7 @@ function App() {
   const [isValidating, setIsValidating] = useState(false);
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
 
-  const { toasts, addToast, removeToast, success, error, warning } = useToast();
+  const { toasts, removeToast, success, error, warning } = useToast();
 
   const handleFileSelect = useCallback(async (selectedFile: File | null) => {
     if (!selectedFile) {
