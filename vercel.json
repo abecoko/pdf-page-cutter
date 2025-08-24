@@ -1,6 +1,7 @@
 {
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
+  "installCommand": "npm install && cd api && npm install",
   "functions": {
     "api/upload.js": {
       "maxDuration": 60
